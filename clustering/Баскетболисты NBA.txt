@@ -1,0 +1,80 @@
+
+
+Баскетболисты NBA
+
+Процент попаданий и амплуа баскетболистов NBA, имевших не менее
+300 попаданий с игры в сезоне 2010-2011
+
+1 столбец: процент попаданий
+2 столбец: амплуа игрока 
+	SF - легкий нападающий, 
+	PF - тяжелый нападающий, 
+	C - центровой, 
+	G - защитник
+
+Источник: сайт ESPN.com
+Severini ANALYTIC METHODS IN SPORTS
+
+Задача.  Что интересное могут рассказать эти данные?
+
+Решение.
+
+#  setwd("c:\\aaa\\_R\\_R_лекции\\R_занятие_1\\basketball\\")
+
+#  Прочитаем первый набор данных
+basketb.01 <- read.table("basketball/basketball_1.csv", header=F, dec=".", sep=";")
+
+#  На всякий случай, как всегда
+summary(basketb.01[,1])
+
+#  Построим гистограмму
+hist(basketb.01[,1])
+
+
+#  Построим более детальные гистограммы - больше столбцов
+
+hist(basketb.01[,1], breaks=8)
+#  Заказываем 8 столбцов, получаем все равно 6! Почему?
+
+hist(basketb.01[,1], breaks=16)
+hist(basketb.01[,1], breaks=20)
+
+#  if a bimodal distribution is suspected, it is generally a good #  idea to investigate further to see 
+#  if a bimodal distribution is a possibility.
+
+
+
+#  Прочитаем второй набор данных
+
+basketb.02 <- read.table("basketball/basketball_2.csv", header=F, dec=".", sep=";")
+
+boxplot(basketb.02[,1]~basketb.02[,2])
+
+
+#  располагаем диаграммы одну под другой: 4 ряда, один столбец
+par(mfrow=c(4,1))
+
+#  Первая гистограмма
+hist(basketb.02[basketb.02[,2]=="C" ,1],  breaks=6, 
+     xlim=c(min(basketb.02[,1])-5, max(basketb.02[,1]+5)), col="white", main="")
+
+#  Вторая гистограмма
+hist(basketb.02[basketb.02[,2]=="G" ,1],  breaks=6, 
+     xlim=c(min(basketb.02[,1])-5, max(basketb.02[,1]+5)),  col="white", main="")
+
+#  3-я гистограмма
+hist(basketb.02[basketb.02[,2]=="PF" ,1],  breaks=6, 
+     xlim=c(min(basketb.02[,1])-5, max(basketb.02[,1]+5)),  ,col="white", main="")
+
+#  4-я гистограмма
+hist(basketb.02[basketb.02[,2]=="SF" ,1],  breaks=6, 
+     xlim=c(min(basketb.02[,1])-5, max(basketb.02[,1]+5)),  ,col="white")
+
+par(mfrow=c(1,1))
+
+#  Слишком мелко...
+#  Попоробовать накладывать гистограммы одну на другую?..
+
+
+
+
